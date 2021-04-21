@@ -4,7 +4,8 @@ namespace ConnorFord2\StripeConnect\Traits;
 
 use ConnorFord2\StripeConnect\ExternalAccount;
 use ConnorFord2\StripeConnect\StripeConnect;
-use Stripe\ExternalAccount as StripeExternalAccount;
+use Stripe\BankAccount;
+use Stripe\Card;
 
 trait ManagesExternalAccounts
 {
@@ -71,7 +72,7 @@ trait ManagesExternalAccounts
     /**
      * Remove an external account from the connect account.
      *
-     * @param  \Stripe\ExternalAccount|string  $externalAccount
+     * @param  \Stripe\BankAccount | \Stripe\Card | string  $externalAccount
      * @return void
      */
     public function removeExternalAccount($externalAccount)
@@ -87,12 +88,12 @@ trait ManagesExternalAccounts
     /**
      * Resolve a ExternalAccount an ID.
      *
-     * @param  \Stripe\ExternalAccount|string  $externalAccount
+     * @param  \Stripe\Card | \Stripe\BankAccount | string  $externalAccount
      * @return string
      */
     protected function resolveStripeExternalAccountID($externalAccount)
     {
-        if ($externalAccount instanceof StripeExternalAccount) {
+        if ($externalAccount instanceof BankAccount || $externalAccount instanceof Card) {
             return $externalAccount->id;
         }
 

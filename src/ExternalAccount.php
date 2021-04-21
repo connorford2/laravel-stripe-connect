@@ -5,7 +5,8 @@ namespace ConnorFord2\StripeConnect;
 use ConnorFord2\StripeConnect\Exceptions\InvalidExternalAccount;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
-use Stripe\ExternalAccount as StripeExternalAccount;
+use Stripe\BankAccount;
+use Stripe\Card;
 use JsonSerializable;
 
 class ExternalAccount implements Arrayable, Jsonable, JsonSerializable
@@ -28,17 +29,13 @@ class ExternalAccount implements Arrayable, Jsonable, JsonSerializable
      * Create a new ExternalAccount instance.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $owner
-     * @param  \Stripe\ExternalAccount  $externalAccount
+     * @param  \Stripe\BankAccount|\Stripe\Card  $externalAccount
      * @return void
      *
      * @throws \ConnorFord2\StripeConnect\Exceptions\InvalidExternalAccount
      */
-    public function __construct($owner, StripeExternalAccount $externalAccount)
+    public function __construct($owner, $externalAccount)
     {
-        if ($owner->stripeConnectId() !== $externalAccount->account) {
-            throw InvalidExternalAccount::invalidOwner($externalAccount, $owner);
-        }
-
         $this->owner = $owner;
         $this->externalAccount = $externalAccount;
     }
@@ -46,7 +43,7 @@ class ExternalAccount implements Arrayable, Jsonable, JsonSerializable
     /**
      * Delete the external account.
      *
-     * @return \Stripe\ExternalAccount
+     * @return \Stripe\BankAccount | \Stripe\Card
      */
     public function delete()
     {
@@ -66,7 +63,7 @@ class ExternalAccount implements Arrayable, Jsonable, JsonSerializable
     /**
      * Get the Stripe ExternalAccount instance.
      *
-     * @return \Stripe\ExternalAccount
+     * @return \Stripe\BankAccount | \Stripe\Card
      */
     public function asStripeExternalAccount()
     {
