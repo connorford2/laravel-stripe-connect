@@ -1,7 +1,13 @@
 {
     "name": "connorford2/laravel-stripe-connect",
-    "description": "Connector for Stripe Connect",
     "type": "library",
+    "description": "Laravel connector for Stripe Connect",
+    "keywords": ["php","laravel","lumen","stripe","stripeconnect","connect"],
+    "homepage": "https://github.com/connorford2/laravel-stripe-connect",
+    "support": {
+        "issues": "https://github.com/connorford2/laravel-stripe-connect/issues",
+        "source": "https://github.com/connorford2/laravel-stripe-connect"
+    },
     "license": "MIT",
     "authors": [
         {
@@ -9,5 +15,14 @@
             "email": "fordconnor@icloud.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^7.2.5|^8.0",
+        "illuminate/support": "^6.0|^7.0|^8.0",
+        "stripe/stripe-php": "^7.39"
+    },
+    "autoload": {
+        "psr-4": {
+            "ConnorFord2\\StripeConnect\\": "src/"
+        }
+    }
 }
