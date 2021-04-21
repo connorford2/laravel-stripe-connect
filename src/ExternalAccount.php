@@ -2,7 +2,6 @@
 
 namespace ConnorFord2\StripeConnect;
 
-use ConnorFord2\StripeConnect\Exceptions\InvalidExternalAccount;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Stripe\BankAccount;

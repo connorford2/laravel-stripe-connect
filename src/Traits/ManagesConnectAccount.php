@@ -35,7 +35,7 @@ trait ManagesConnectAccount
      */
     protected function assertAccountExists()
     {
-        if (! $this->hasStripeId()) {
+        if (! $this->hasStripeConnectId()) {
             throw InvalidAccount::notYetCreated($this);
         }
     }
