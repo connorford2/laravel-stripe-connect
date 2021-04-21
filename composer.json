@@ -1,0 +1,13 @@
+{
+    "name": "connorford2/laravel-stripe-connect",
+    "description": "Connector for Stripe Connect",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Connor Ford",
+            "email": "fordconnor@icloud.com"
+        }
+    ],
+    "require": {}
+}
