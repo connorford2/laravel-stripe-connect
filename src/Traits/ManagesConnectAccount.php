@@ -59,7 +59,7 @@ trait ManagesConnectAccount
      * @return void
      * @throws \ConnorFord2\StripeConnect\Exceptions\InvalidAccount
      */
-    protected function createOrGetConnectAccount()
+    public function createOrGetConnectAccount()
     {
         if ($this->hasStripeConnectId()) {
             return $this->getConnectAccount();
@@ -74,7 +74,7 @@ trait ManagesConnectAccount
      * @return ConnectAccount
      * @throws \ConnorFord2\StripeConnect\Exceptions\InvalidAccount
      */
-    protected function createConnectAccount($parameters)
+    public function createConnectAccount($parameters)
     {
         $connectAccount = StripeConnect::stripeClientInstance()->accounts->create($parameters);
         $this->setStripeConnectId($connectAccount->id);
@@ -87,8 +87,9 @@ trait ManagesConnectAccount
      * @return void
      * @throws \ConnorFord2\StripeConnect\Exceptions\InvalidAccount
      */
-    protected function getConnectAccount()
+    public function getConnectAccount()
     {
+        $this->assertAccountExists();
         return StripeConnect::stripeClientInstance()->accounts->retrieve($this->stripeConnectId(), []);
     }
 
@@ -98,7 +99,7 @@ trait ManagesConnectAccount
      * @return void
      * @throws \ConnorFord2\StripeConnect\Exceptions\InvalidAccount
      */
-    protected function removeConnectAccount()
+    public function removeConnectAccount()
     {
         if (! $this->hasStripeConnectId()) {
             throw InvalidAccount::notYetCreated($this);
