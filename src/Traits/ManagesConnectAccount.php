@@ -94,6 +94,18 @@ trait ManagesConnectAccount
     }
 
     /**
+     * Retrieve the owner's Stripe Connect Account
+     *
+     * @return void
+     * @throws \ConnorFord2\StripeConnect\Exceptions\InvalidAccount
+     */
+    public function updateConnectAccount($attributes)
+    {
+        $this->assertAccountExists();
+        return StripeConnect::stripeClientInstance()->accounts->update($this->stripeConnectId(), $attributes);
+    }
+
+    /**
      * Delete the owner's Stripe Connect Account
      *
      * @return void
@@ -101,9 +113,7 @@ trait ManagesConnectAccount
      */
     public function removeConnectAccount()
     {
-        if (! $this->hasStripeConnectId()) {
-            throw InvalidAccount::notYetCreated($this);
-        }
+        $this->assertAccountExists();
     }
 
 }
