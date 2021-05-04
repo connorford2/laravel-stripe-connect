@@ -4,7 +4,7 @@ namespace ConnorFord2\StripeConnect;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
-use Stripe\ConnectAccount as StripeConnectAccount;
+use Stripe\Account;
 use JsonSerializable;
 
 class ConnectAccount implements Arrayable, Jsonable, JsonSerializable
@@ -19,7 +19,7 @@ class ConnectAccount implements Arrayable, Jsonable, JsonSerializable
     /**
      * The Stripe ConnectAccount instance.
      *
-     * @var \Stripe\ConnectAccount
+     * @var \Stripe\Account
      */
     protected $connectAccount;
 
@@ -31,7 +31,7 @@ class ConnectAccount implements Arrayable, Jsonable, JsonSerializable
      * @return void
      *
      */
-    public function __construct($owner, StripeConnectAccount $connectAccount)
+    public function __construct($owner, \Stripe\Account $connectAccount)
     {
         $this->owner = $owner;
         $this->connectAccount = $connectAccount;
@@ -40,7 +40,7 @@ class ConnectAccount implements Arrayable, Jsonable, JsonSerializable
     /**
      * Delete the connet account.
      *
-     * @return \Stripe\ConnectAccount
+     * @return \Stripe\Account
      */
     public function delete()
     {
@@ -60,7 +60,7 @@ class ConnectAccount implements Arrayable, Jsonable, JsonSerializable
     /**
      * Get the Stripe ExternalAccount instance.
      *
-     * @return \Stripe\ConnectAccount
+     * @return \Stripe\Account
      */
     public function asStripeConnectAccount()
     {
