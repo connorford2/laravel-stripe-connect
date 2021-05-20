@@ -4,10 +4,10 @@ namespace ConnorFord2\StripeConnect;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
-use Stripe\Account;
+use Stripe\Transfer as StripeTransfer;
 use JsonSerializable;
 
-class ConnectAccount implements Arrayable, Jsonable, JsonSerializable
+class Transfer implements Arrayable, Jsonable, JsonSerializable
 {
     /**
      * The Stripe model instance.
@@ -17,34 +17,24 @@ class ConnectAccount implements Arrayable, Jsonable, JsonSerializable
     protected $owner;
 
     /**
-     * The Stripe ConnectAccount instance.
+     * The Stripe Transfer instance.
      *
-     * @var \Stripe\Account
+     * @var \Stripe\Transfer
      */
-    protected $connectAccount;
+    protected $transfer;
 
     /**
-     * Create a new ConnectAccount instance.
+     * Create a new Transfer instance.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $owner
-     * @param  \Stripe\ConnectAccount $connectAccount
+     * @param  \Stripe\Transfer $transfer
      * @return void
      *
      */
-    public function __construct($owner, \Stripe\Account $connectAccount)
+    public function __construct($owner, \Stripe\Transfer $transfer)
     {
         $this->owner = $owner;
-        $this->connectAccount = $connectAccount;
-    }
-
-    /**
-     * Delete the connect account.
-     *
-     * @return \Stripe\Account
-     */
-    public function delete()
-    {
-        return $this->owner->removeExternalAccount($this->externalAccount);
+        $this->transfer = $transfer;
     }
 
     /**
@@ -60,11 +50,11 @@ class ConnectAccount implements Arrayable, Jsonable, JsonSerializable
     /**
      * Get the Stripe ExternalAccount instance.
      *
-     * @return \Stripe\Account
+     * @return \Stripe\Transfer
      */
-    public function asStripeConnectAccount()
+    public function asStripeTransfer()
     {
-        return $this->connectAccount;
+        return $this->transfer;
     }
 
     /**
@@ -74,7 +64,7 @@ class ConnectAccount implements Arrayable, Jsonable, JsonSerializable
      */
     public function toArray()
     {
-        return $this->asStripeConnectAccount()->toArray();
+        return $this->asStripeTransfer()->toArray();
     }
 
     /**
@@ -106,6 +96,6 @@ class ConnectAccount implements Arrayable, Jsonable, JsonSerializable
      */
     public function __get($key)
     {
-        return $this->connectAccount->{$key};
+        return $this->transfer->{$key};
     }
 }
