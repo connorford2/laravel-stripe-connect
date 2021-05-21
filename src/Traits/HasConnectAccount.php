@@ -6,6 +6,7 @@ trait HasConnectAccount
 {
     use ManagesConnectAccount;
     use ManagesExternalAccounts;
+    use Transferrable;
 }
 
 
