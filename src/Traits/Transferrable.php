@@ -2,6 +2,7 @@
 
 namespace ConnorFord2\StripeConnect\Traits;
 
+use ConnorFord2\StripeConnect\StripeConnect;
 use ConnorFord2\StripeConnect\Transfer;
 
 trait Transferrable
