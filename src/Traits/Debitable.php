@@ -18,7 +18,7 @@ trait Debitable
     {
         $this->assertAccountExists();
 
-        return StripeConnect::stripeClientInstance()->tra->create(array_merge([
+        return StripeConnect::stripeClientInstance()->charges->create(array_merge([
             'source' => $this->stripeConnectId()
         ], $parameters));
     }
